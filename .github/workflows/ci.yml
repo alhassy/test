@@ -1,0 +1,16 @@
+name: CI
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-emacs-org-notes:
+    runs-on: ubuntu-latest
+    container: alpine:3.13.4
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install emacs
+        run: apk --update add emacs
+      - name: Render notes into html
+        run: emacs How-Do-I.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill
