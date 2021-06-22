@@ -15,7 +15,7 @@ jobs:
       - name: Render notes into html
         run: emacs go.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill; mkdir output; mv go.html output/
       - name: Install git
-        run: apt install git
+        run: apk add git
       - name: stage changed files
         run: git add .
       - name: commit changed files
