@@ -13,4 +13,11 @@ jobs:
       - name: Install emacs
         run: apk --update add emacs
       - name: Render notes into html
-        run: emacs How-Do-I.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill
+        run: emacs go.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill; mkdir output; mv go.html output/
+      - name: Pushes to destination repository
+        uses: cpina/github-action-push-to-another-repository@cp_instead_of_deleting
+        with:
+          source-directory: '.'
+          destination-github-username: 'alhassy'
+          destination-repository-name: 'test'
+          user-email: alhassy@gmail.com
