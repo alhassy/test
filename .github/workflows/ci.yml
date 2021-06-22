@@ -13,4 +13,4 @@ jobs:
       - name: Install emacs
         run: apk --update add emacs
       - name: Render notes into html
-        run: emacs How-Do-I.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill
+        run: emacs go.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill
