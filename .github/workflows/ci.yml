@@ -1,22 +1,40 @@
-name: CI
+name: Create file
 
-on:
-  push:
-    branches: [ master ]
+on: [push]
 
 jobs:
-  build-emacs-org-notes:
+  build:
     runs-on: ubuntu-latest
-    container: alpine:3.13.4
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Create/update text file
-        run: echo "var=x" > test.txt
-      - name: Commit and Push
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "commit message"
-          git push
+    - name: Create file
+      run: |
+        printf "Hello\nWorld\n" > hw.txt
+
+    - name: Create file
+      run: |
+        echo First        > other.txt
+        echo Second Line >> other.txt
+        echo Third       >> other.txt
+
+
+    - name: Show file content
+      run: |
+        pwd
+        ls -la
+        cat hw.txt
+        cat other.txt
+
+
+    - name: Create directory and create file in homedir
+      run: |
+        ls -la ~/
+        mkdir ~/.zorg
+        echo First        > ~/.zorg/home.txt
+        echo Second Line >> ~/.zorg/home.txt
+        echo Third       >> ~/.zorg/home.txt
+        ls -la ~/.zorg/
+
+    - name: Show file content
+      run: |
+        ls -la ~/
+        cat ~/.zorg/home.txt
