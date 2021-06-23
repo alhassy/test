@@ -9,14 +9,14 @@ jobs:
     runs-on: ubuntu-latest
     container: alpine:3.13.4
     steps:
-      - uses: actions/checkout@v2
-      - name: Install emacs
-        run: apk --update add emacs        
-      - name: Render notes into html
-        run: emacs go.org --batch -Q --load minimal-setup-to-export-org-to-html.el -f org-html-export-to-html --kill; mkdir output; mv go.html output/
-      - name: Install git
-        run: apk add git
-      - name: stage & commit changed files
-        run: git commit -a -m "Auto updating How-Do-I.html"
-      - name: push code to master
-        run: git push origin HEAD:master
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Create/update text file
+        run: echo "var=x" > test.txt
+      - name: Commit and Push
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "commit message"
+          git push
